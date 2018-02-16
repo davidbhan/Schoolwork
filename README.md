@@ -1,13 +1,13 @@
 # coursework
 Selected projects from courses taken at HKU
 
-# Year 1
+<h1> Year 1 </h1>
 ### Airport Database (C++)
 Airport flight management system with csv file manipulation
 ### Laser Grid (C++)
 Calculating laser paths in a grid map
 
-# Year 2
+<h1> Year 2 </h1>
 ### Binary Tree Splaying (C++)
 Basic binary tree v. splayed binary tree search and insert operation efficiency comparison
 ### Complex Numbers (C++)
