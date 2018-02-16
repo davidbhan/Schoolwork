@@ -9,23 +9,33 @@ Airport flight management system with csv file manipulation
 Calculating laser paths in a grid map
 
 <h2> Year 2 </h2>
-### Binary Tree Splaying (C++)
+<b> Binary Tree Splaying (C++) </b>
 Basic binary tree v. splayed binary tree search and insert operation efficiency comparison
-### Complex Numbers (C++)
+<br>
+<b> Complex Numbers (C++) </b>
 Implementation of complex number class
-### Dijkstra's Algorithm (C++)
+<br>
+<b> Dijkstra's Algorithm (C++) </b>
 Implementation of Dijkstra's Algorithm in searching gas stations
-### Leap Year (C++)
+<br>
+<b> Leap Year (C++) </b>
 Simple program to check if a year is a leap year or not
-### Linked List (C++)
+<br>
+<b> Linked List (C++) </b>
 Implementation of linked list and methods
-### Palindrome Checker (C++)
+<br>
+<b> Palindrome Checker (C++) </b>
 Checks if a string is a palindrome when all whitespace and punctuation is removed
-### Infix to Postfix (Java)
+<br>
+<b> Infix to Postfix (Java) </b>
 Converts arithmetic sequence from infix to postfix, using self-made java stack class
-### Shell Programming (Bash)
+<br>
+<b> Shell Programming (Bash) </b>
 Bash scripts to manipulate log files of store purchases and calculate statistics
-### Stack (C)
+<br>
+<b> Stack (C) </b>
 Implementation of Stack in C
-### Student Database (C++)
+<br>
+<b> Student Database (C++) </b>
 Student information management system utilizing C++ STL
+<br>
