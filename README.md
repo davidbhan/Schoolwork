@@ -39,3 +39,6 @@ Implementation of Stack in C
 <b> Student Database (C++) </b>
 Student information management system utilizing C++ STL
 <br>
+<b> Forest Simulator (Java) </b>
+Simulation of forest animal behaviors in a 2D grid, making full use of polymorphism and inheritance
+<br>
