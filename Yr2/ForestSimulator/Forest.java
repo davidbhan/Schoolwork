@@ -22,20 +22,24 @@ public class Forest {
 	}
 	
 	/**
-	 * Central logic code of the program
+	 * Driver for the program
 	 * NOTE: The ArrayList of animals is nested in the Map Class for cleaner, more economic design
+	 * Full use of polymorphism and inheritance is still used in Animal moving and attacking, only class nesting is different from sinkDotCom
 	 */
 	public void run() {
-		Map map = new Map(); // Create a new map for the forest
-		
-		String line; // Read in user input and iterate the map until user types 'exit'
+		// Create a new map section in the forest and print it
+		Map map = new Map(); 
 		System.out.print("Press enter to iterate, type 'exit' to quit:");
-		line = scanner.nextLine();
+		String line = scanner.nextLine();
+		
+		// Read in user input and iterate the map until user types 'exit'
 		while(!line.equals("exit")) {
-			map.iterate();
+			map.iterate(); 
 			System.out.print("Press enter to iterate, type 'exit' to quit:");
 			line = scanner.nextLine();
 		}
+		
+		map.exit(); // Prints living conditions and locations of all animals
 	}
 	
 }

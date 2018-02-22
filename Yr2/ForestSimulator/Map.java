@@ -4,19 +4,21 @@ import java.util.ArrayList;
 
 /**
  * 
- * Map class for handling the forest map display and animal list
+ * Map class for handling the forest map display. Contains a nested animal list
  * @author davidbhan
  *
  */
 public class Map {
 
-	private ArrayList<Animal> animals = new ArrayList<Animal>();
-	private char[][] map = new char[15][15];
+	private ArrayList<Animal> animals; 	// List of animals on map
+	private char[][] map; 				// Map representation
 	
 	/**
 	 * Constructor for the Map, creates and populates the map, then prints it out
 	 */
 	Map() {		
+		animals = new ArrayList<Animal>();
+		map = new char[15][15]; 
 		initializeMap(); 		// Fill map with '.'
 		initializeAnimals(); 	// Add desired animals to the the ArrayList of animals in movement order
 		initializePositions(); 	// Initialize Random positions of animals on map
@@ -65,7 +67,7 @@ public class Map {
 			}
 			animal.setPositionY(randomY);
 			
-			// Update map after each animal
+			// Update map after adding each animal
 			updateMap();
 		}		
 	}
@@ -76,6 +78,9 @@ public class Map {
 	public void updateMap() {
 		initializeMap();
 		for(Animal animal : animals) {
+			if(animal.getIsDead()) {
+				continue;
+			}
 			map[animal.getPositionX()][animal.getPositionY()] = animal.getRepresentation();
 		}
 	}
@@ -97,9 +102,11 @@ public class Map {
 	 */
 	public void iterate() {
 		
-		// Perform an action for each animal
-		for(int i = 0; i < animals.size(); i++) {
-			Animal animal = animals.get(i);
+		// Perform an action for each animal that is alive
+		for(Animal animal : animals) {
+			if(animal.getIsDead()) {
+				continue;
+			}
 			
 			// Tentatively move the animal and get original and target coordinates without updating map
 			int originalX = animal.getPositionX();
@@ -108,12 +115,24 @@ public class Map {
 			int newX = animal.getPositionX();
 			int newY = animal.getPositionY();
 			
-			// If target block has a different animal, find which animal in animals is the target of the attack by matching coordinates
+			// Check if target map coordinates isn't empty and has a different animal
 			if(map[newX][newY] != animal.getRepresentation() && map[newX][newY] != '.') {
-				for(int j = 0; j < animals.size(); j++) {
-					Animal target = animals.get(j);
+				
+				// Find which animal in animals is the target of the attack by matching x,y positions
+				for(Animal target : animals) {
 					
-					if(target.getPositionX() == newX && target.getPositionY() == newY && !target.getSpecies().equals(animal.getSpecies())) {
+					// Skip dead animals
+					if(target.getIsDead()) {
+						continue;
+					}
+					
+					// Skip self
+					if(target.getSpecies().equals(animal.getSpecies())) {
+						continue;
+					}
+					
+					// Find animal with matching coordinates
+					if(target.getPositionX() == newX && target.getPositionY() == newY) {
 						boolean attackSuccess = animal.attack(target);
 						if(attackSuccess) {
 							System.out.println(animal.getSpecies() + " from " + originalX + "," + originalY + " attacks " + target.getSpecies() + " at " + newX + "," + newY + " and wins");
@@ -123,20 +142,21 @@ public class Map {
 							System.out.println(animal.getSpecies() + " from " + originalX + "," + originalY + " attacks " + target.getSpecies() + " at " + newX + "," + newY + " and loses");							
 							kill(animal);
 						}
+						
 					}
 				}
 			} else {
-				// Directly move animal when block is empty or has is original position
+				// Directly move animal when target coordinate is empty or is the original position
 				System.out.println(animal.getSpecies() + " moved from " + originalX + "," + originalY + " to " + newX + "," + newY);
 			}
 			updateMap();
 		}
-		
-		printMap();
-		
 	}
 	
-	
+	/**
+	 * Reassigns dead animal to a random nearby position, prints out its death, then marks it as dead
+	 * @param animal Animal from ArrayList to be killed
+	 */
 	public void kill(Animal animal) {
 		// Count number of open spaces around the target
 		int numOpenSpaces = 0;
@@ -165,7 +185,6 @@ public class Map {
 					continue;
 				} else if(map[x][y] == '.') {
 					if(counter == random) {
-						animal.setDead(true);
 						animal.setPositionX(x);
 						animal.setPositionY(y);
 					}
@@ -177,10 +196,27 @@ public class Map {
 		// Print death message
 		System.out.println(animal.getSpecies() + " dies at " + animal.getPositionX() + "," + animal.getPositionY());
 		
-		// Delete animal from animals ArrayList
-		animals.remove(animal);
+		// Set animal as dead
+		animal.setIsDead(true);
 	}
 	
-
+	/**
+	 * Prints out locations of living animals, followed by locations of dead animals
+	 */
+	public void exit() {
+		// Print living animals
+		for(Animal animal : animals) {
+			if(!animal.getIsDead()) {
+				System.out.println(animal.getSpecies() + " is alive at " + animal.getPositionX() + "," + animal.getPositionY());
+			}
+		}
+		
+		// Print dead animals
+		for(Animal animal : animals) {
+			if(animal.getIsDead()) {
+				System.out.println(animal.getSpecies() + " is dead at " + animal.getPositionX() + "," + animal.getPositionY());
+			}
+		}
+	}
 	
 }

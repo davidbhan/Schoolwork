@@ -4,28 +4,28 @@ import java.util.Random;
 
 /**
  * 
- * Animal superclass
+ * Abstract animal superclass
  * @author davidbhan
  *
  */
-public class Animal {
+public abstract class Animal {
 
 	private char representation;
 	private String species;
 	private String type;
-	private boolean isDead;
 	private int positionX;
 	private int positionY;
+	private boolean isDead;
 	private Random rand = new Random();
 	
 	/**
-	 * Constructor for Animal, initialize as alive
+	 * Constructor for Animal
 	 */
 	Animal() {
-		isDead = false;
 		type = "no_type";
 		species = "no_species";
 		representation = 'n';
+		isDead = false;
 	}
 	
 	/**
@@ -36,7 +36,7 @@ public class Animal {
 		
 		// If animal is in corner, 50% chance to not move
 		if(isInCorner()) {
-			if(getRandom(2) > 0) {
+			if(getRandom(2) == 0) {
 				return;
 			}
 		}
@@ -70,17 +70,22 @@ public class Animal {
 		
 	}
 	
+	/**
+	 * Baseline attack function for animal
+	 * @param animal target animal that is being attacked by this
+	 * @return true if the attack is a success and target dies
+	 */
 	public boolean attack(Animal animal) {
+		// 20% chance to win against turtle
 		if(animal.getClass().getSimpleName().equals("Turtle")) {
 			if(getRandom(10) < 2) {
 				return true;
 			}
-			return false;
 		}
+		// Default behavior is to lose
 		return false;
 	}
 	
-
 	/**
 	 * Checks if animal is located in a corner of the board
 	 * @return true if in corner
@@ -99,7 +104,7 @@ public class Animal {
 	}
 	
 	/**
-	 * Random number generator
+	 * Random number generator method for ease of use in subclasses
 	 * @param bound the bound on the random number generated
 	 * @return an integer from [0,bound)
 	 */
@@ -152,17 +157,17 @@ public class Animal {
 	/**
 	 * @return the isDead
 	 */
-	public boolean isDead() {
+	public boolean getIsDead() {
 		return isDead;
 	}
 
 	/**
 	 * @param isDead the isDead to set
 	 */
-	public void setDead(boolean isDead) {
+	public void setIsDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-
+	
 	/**
 	 * @return the positionX
 	 */
@@ -190,8 +195,6 @@ public class Animal {
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
-
-	
 
 
 }

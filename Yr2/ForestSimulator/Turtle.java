@@ -1,7 +1,16 @@
 package assignment2_3035344211;
 
+/**
+ * 
+ * Turtle Class
+ * @author davidbhan
+ *
+ */
 public class Turtle extends Animal{
 	
+	/**
+	 * Constructor for Turtle
+	 */
 	Turtle() {
 		this.setRepresentation('u');
 		this.setSpecies("Turtle");
@@ -13,8 +22,8 @@ public class Turtle extends Animal{
 	 */
 	public void move() {		
 		
-		// Whether turtle is in corner or not, it has 50% chance to stay in place
-		if(this.getRandom(2) > 0) {
+		// Whether turtle is in corner or not, it always has 50% chance to stay in place
+		if(this.getRandom(2) == 0) {
 			return;
 		}
 		
@@ -46,7 +55,13 @@ public class Turtle extends Animal{
 		}				
 	}
 	
+	/**
+	 * Attack function for Turtle
+	 * @param animal target animal that is being attacked by this
+	 * @return true if the attack is a success and target dies
+	 */
 	public boolean attack(Animal animal) {
+		// Attacking turtle always has 50% chance of winning
 		if(getRandom(2) == 0) {
 			return true;
 		}		
