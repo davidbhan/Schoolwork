@@ -40,5 +40,8 @@ Implementation of Stack in C
 Student information management system utilizing C++ STL
 <br>
 <b> Forest Simulator (Java) </b>
-Simulation of forest animal behaviors in a 2D grid, making full use of polymorphism and inheritance
+Simulation of forest animal movement and behaviors utilizing Polymorphism and Inheritance
+<br>
+<b> Corner Detection and Image Maniuplation (C++) </b>
+Implementation of Harris Corner Detection and RGB to Grayscale convertion
 <br>
